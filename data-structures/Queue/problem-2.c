@@ -146,6 +146,10 @@ main (void)
         g_free (tmp);
     }
     assert (queue_size (queue) == 5);
+
+    for (i = 0; i < 10; i++)
+        enqueue (queue, new_node (i+10));
+    assert (queue_size (queue) == 15);
     queue_print_all (queue);
 
     queue_full_free (queue);
