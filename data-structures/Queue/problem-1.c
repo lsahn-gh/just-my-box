@@ -13,17 +13,17 @@
 #include "linked-queue.h"
 
 static Node *
-internal_reverse (Node *node)
+internal_reverse (Node *cur_node)
 {
-    Node *tmp;
+    Node *next_node;
 
-    if (node == NULL)
+    if (cur_node == NULL)
         return NULL;
 
-    tmp = internal_reverse (node->next);
-    if (tmp != NULL)
-        tmp->next = node;
-    return node;
+    next_node = internal_reverse (cur_node->next);
+    if (next_node != NULL)
+        next_node->next = cur_node;
+    return cur_node;
 }
 
 void
