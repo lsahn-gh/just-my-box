@@ -1,25 +1,32 @@
 #pragma once
 
-typedef struct _node Node;
+typedef void * npointer;
+typedef void (*ForeachCall) (npointer);
+typedef void (*RecursionCall) (npointer);
+
+typedef struct _lq_node
+{
+    struct _lq_node *next;
+} LQNode;
 
 typedef struct _queue
 {
     int length;
-    Node *front;
-    Node *rear;
+    LQNode *front;
+    LQNode *rear;
 } Queue;
 
-struct _node
-{
-    Node *next;
-    int data;
-};
+#define LQNODE(_ptr) ((LQNode*)_ptr)
+#define FOREACH_CALL(_ptr) ((ForeachCall)_ptr)
+#define RECURSION_CALL(_ptr) ((RecursionCall)_ptr)
 
-Node * node_new (int data);
 Queue * queue_new (void);
 int queue_is_empty (Queue *queue);
 int queue_size (Queue *queue);
-void enqueue (Queue *queue, Node *new_node);
-Node * dequeue (Queue *queue);
+npointer queue_get_front (Queue *queue);
+npointer queue_get_rear (Queue *queue);
+void enqueue (Queue *queue, npointer new_node);
+npointer dequeue (Queue *queue);
 int queue_full_free (Queue **qptr);
-void queue_print_all (Queue *queue);
+void queue_foreach (Queue *queue, ForeachCall fptr);
+void queue_recursion (Queue *queue, RecursionCall fptr);

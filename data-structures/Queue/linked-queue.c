@@ -3,17 +3,6 @@
 
 #include "linked-queue.h"
 
-Node *
-node_new (int data)
-{
-    Node *new_node;
-
-    new_node = (Node *)malloc(sizeof(Node));
-    new_node->next = NULL;
-    new_node->data = data;
-
-    return new_node;
-}
 
 Queue *
 queue_new (void)
@@ -40,9 +29,29 @@ queue_size (Queue *queue)
     return queue->length;
 }
 
-void
-enqueue (Queue *queue, Node *new_node)
+npointer
+queue_get_front (Queue *queue)
 {
+    if (queue_is_empty (queue))
+        return NULL;
+
+    return queue->front;
+}
+
+npointer
+queue_get_rear (Queue *queue)
+{
+    if (queue_is_empty (queue))
+        return NULL;
+
+    return queue->rear;
+}
+
+void
+enqueue (Queue *queue, npointer new_node)
+{
+    LQNODE (new_node)->next = NULL;
+
     if (queue->rear == NULL) {
         queue->front = queue->rear = new_node;
     } else {
@@ -52,10 +61,10 @@ enqueue (Queue *queue, Node *new_node)
     queue->length += 1;
 }
 
-Node *
+npointer
 dequeue (Queue *queue)
 {
-    Node *ret;
+    LQNode *ret;
 
     if (queue_is_empty (queue))
         return NULL;
@@ -64,6 +73,7 @@ dequeue (Queue *queue)
     queue->front = ret->next;
     queue->length -= 1;
 
+    ret->next = NULL;
     return ret;
 }
 
@@ -83,13 +93,29 @@ queue_full_free (Queue **qptr)
 }
 
 void
-queue_print_all (Queue *queue)
+queue_foreach (Queue *queue, ForeachCall fptr)
 {
-    Node *cur = queue->front;
+    LQNode *cur = queue->front;
 
     while (cur != NULL) {
-        printf ("%d ", cur->data);
+        fptr (cur);
         cur = cur->next;
     }
     printf ("\n");
+}
+
+static npointer
+internal_recursion (LQNode *cur, ForeachCall fptr)
+{
+    if (cur == NULL)
+        return NULL;
+    
+    internal_recursion (cur->next, fptr);
+    fptr (cur);
+}
+
+void
+queue_recursion (Queue *queue, ForeachCall fptr)
+{
+    internal_recursion (queue->front, fptr);
 }
