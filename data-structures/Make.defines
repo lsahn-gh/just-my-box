@@ -1,0 +1,8 @@
+CC = gcc
+CFLAGS = -I../libs -g -Wall -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include
+LIBXZ = libxz.a
+LIBXZ_PATH = ../libs/$(LIBXZ)
+LIBS = $(LIBXZ_PATH) -Wl,--export-dynamic -lgmodule-2.0 -pthread -lglib-2.0
+RANLIB = ranlib
+
+CLEANFILES = *.o *.out
