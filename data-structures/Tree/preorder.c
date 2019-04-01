@@ -25,6 +25,15 @@ main (void)
 
     tree = xz_tree_new (COMPARE_FUNC (my_tree_cmp));
 
+    /*
+     *   3
+     *  / \
+     * 2   5
+     *    / \
+     *   4   6
+     *        \
+     *         7
+     */
     xz_tree_insert (tree, my_tree_node_new (3));
     xz_tree_insert (tree, my_tree_node_new (2));
     xz_tree_insert (tree, my_tree_node_new (5));
@@ -32,6 +41,7 @@ main (void)
     xz_tree_insert (tree, my_tree_node_new (6));
     xz_tree_insert (tree, my_tree_node_new (7));
 
+    /* Output: 3 2 5 4 6 7 */
     pre_order (MY_TREE_NODE (tree->root));
     g_print ("\n");
 
