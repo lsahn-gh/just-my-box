@@ -2,10 +2,10 @@ include ../Make.defines
 
 MY_LIBS = mytree.h mytree.c
 
-PROGS =	preorder preorder-loop inorder inorder-loop postorder
+PROGS =	preorder preorder-loop inorder inorder-loop postorder \
+		levelorder
 
 all:	${PROGS}
-			rm -f *.o
 
 preorder:	preorder.o
 			${CC} ${CFLAGS} -o $@ preorder.o ${LIBS} ${MY_LIBS}
@@ -21,6 +21,9 @@ inorder-loop:	inorder-loop.o
 
 postorder:	postorder.o
 			${CC} ${CFLAGS} -o $@ postorder.o ${LIBS} ${MY_LIBS}
+
+levelorder: levelorder.o
+			${CC} ${CFLAGS} -o $@ levelorder.o ${LIBS} ${MY_LIBS}
 
 clean:
 			rm -f ${PROGS} ${CLEANFILES}
