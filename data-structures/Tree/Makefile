@@ -3,7 +3,7 @@ include ../Make.defines
 MY_LIBS = mytree.h mytree.c
 
 PROGS =	preorder preorder-loop inorder inorder-loop postorder \
-		levelorder problem-1and2 problem-3
+		levelorder problem-1and2 problem-3 problem-6
 
 all:	${PROGS}
 
@@ -30,6 +30,9 @@ problem-1and2:	problem-1and2.o
 
 problem-3: problem-3.o
 			${CC} ${CFLAGS} -o $@ problem-3.o ${LIBS} ${MY_LIBS}
+
+problem-6: problem-6.o
+			${CC} ${CFLAGS} -o $@ problem-6.o ${LIBS} ${MY_LIBS}
 
 clean:
 			rm -f ${PROGS} ${CLEANFILES}
