@@ -91,6 +91,7 @@ queue_free (Queue *queue)
     }
 }
 
+#if 0
 int
 main (void)
 {
@@ -124,3 +125,4 @@ main (void)
 
     return 0;
 }
+#endif
