@@ -6,7 +6,7 @@ typedef void (*RecursionCall) (npointer);
 
 typedef struct _lq_node
 {
-    struct _lq_node *next;
+    npointer next;
 } LQNode;
 
 typedef struct _queue
