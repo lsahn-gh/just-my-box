@@ -4,7 +4,7 @@ MY_LIBS = mytree.h mytree.c
 
 PROGS =	preorder preorder-loop inorder inorder-loop postorder \
 		levelorder problem-1and2 problem-3 problem-6 problem-7 \
-		problem-8 problem-9 problem-10
+		problem-8 problem-9 problem-10 problem-11
 
 all:	${PROGS}
 
@@ -46,6 +46,9 @@ problem-9: problem-9.o
 
 problem-10: problem-10.o
 			${CC} ${CFLAGS} -o $@ problem-10.o ${LIBS} ${MY_LIBS}
+
+problem-11: problem-11.o
+			${CC} ${CFLAGS} -o $@ problem-11.o ${LIBS} ${MY_LIBS}
 
 clean:
 			rm -f ${PROGS} ${CLEANFILES}
