@@ -2,7 +2,7 @@ include ../Make.defines
 
 MY_LIBS = mytree.h mytree.c
 
-PROGS =	bubble_sort selectionsort insertionsort
+PROGS =	bubble_sort selectionsort insertionsort mergesort
 
 all:	${PROGS}
 
@@ -14,6 +14,9 @@ selectionsort: selectionsort.o
 
 insertionsort: insertionsort.o
 			${CC} ${CFLAGS} -o $@ insertionsort.o ${LIBS}
+
+mergesort: mergesort.o
+			${CC} ${CFLAGS} -std=c99 -o $@ mergesort.o ${LIBS}
 
 clean:
 			rm -f ${PROGS} ${CLEANFILES}
