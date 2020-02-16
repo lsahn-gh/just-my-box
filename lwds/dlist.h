@@ -68,7 +68,7 @@ static inline int dlist_remove(dlist_t *item)
 static inline int dlist_empty(dlist_t *head)
 {
   if (head == NULL)
-    return 0;
+    return 1;
 
   return head->next == head;
 }
