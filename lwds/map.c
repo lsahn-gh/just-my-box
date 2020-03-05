@@ -37,21 +37,14 @@ int
 mac2key(const uint8_t *macaddr, uint64_t *out_key)
 {
   uint64_t new_key = 0;
-  uint8_t *ptr;
+  const uint8_t *ptr = macaddr;
 
   if (macaddr == NULL || out_key == NULL)
     return -1;
 
-  ptr = (uint8_t *)new_key;
-
-  ptr[0] = 0;
-  ptr[1] = 0;
-  ptr[2] = macaddr[0];
-  ptr[3] = macaddr[1];
-  ptr[4] = macaddr[2];
-  ptr[5] = macaddr[3];
-  ptr[6] = macaddr[4];
-  ptr[7] = macaddr[5];
+  for (int i = 5; i >= 0; ++ptr, i--) {
+    new_key |= (uint64_t)*ptr << (8 * i);
+  }
 
   *out_key = new_key;
 
