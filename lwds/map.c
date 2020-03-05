@@ -32,25 +32,6 @@ static inline void map_unlock(void)
   pthread_mutex_unlock(&maplock);
 }
 
-/* --- Common section --- */
-int
-mac2key(const uint8_t *macaddr, uint64_t *out_key)
-{
-  uint64_t new_key = 0;
-  const uint8_t *ptr = macaddr;
-
-  if (macaddr == NULL || out_key == NULL)
-    return -1;
-
-  for (int i = 5; i >= 0; ++ptr, i--) {
-    new_key |= (uint64_t)*ptr << (8 * i);
-  }
-
-  *out_key = new_key;
-
-  return 0;
-}
-
 /* --- Net map section --- */
 static value_t *
 value_new (void)
